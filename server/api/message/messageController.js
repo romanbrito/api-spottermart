@@ -1,10 +1,19 @@
 import Message from './messageModel';
 
-export const params = (req, res, next, user) => {
-  const result = messages.filter(message => message.owner == user);
-  req.result = result;
-  console.log(req.result);
-  next();
+export const params = (req, res, next, id) => {
+  Message.findById(id)
+    .populate('author', '-password')
+    .exec()
+    .then(message => {
+      if (!message) {
+        next(new Error('No message with thatrs id'));
+      } else {
+        req.message = message;
+        next();
+      }
+    }, err => {
+      next(err);
+    });
 };
 
 export const get = (req, res, next) => {
@@ -19,8 +28,9 @@ export const get = (req, res, next) => {
     })
 };
 
-export const getByUser = (req, res, next) => {
-  res.json(req.result);
+export const getOne = (req, res, next) => {
+  const message = req.message;
+  res.json(message);
 };
 
 export const post = (req, res, next) => {
