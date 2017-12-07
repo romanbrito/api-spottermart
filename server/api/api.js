@@ -1,12 +1,13 @@
 import {Router} from 'express';
 const router = Router();
-//import userRoutes from './user/userRoutes';
+import userRoutes from './user/userRoutes';
 import categoryRoutes from './category/categoryRoutes';
 import postRoutes from './post/postRoutes';
+import auth from '../auth/routes';
 
 import messageRoutes from './message/messageRoutes';
-import auth from './message/auth/routes';
-import userRoutes from './message/user/userRoutes';
+//import auth from './message/auth/routes';
+//import userRoutes from './message/user/userRoutes';
 
 // api router will mount other routers
 // for all our resources. Each resource directory
