@@ -34,6 +34,10 @@ export const getOne = (req, res, next) => {
 };
 
 export const post = (req, res, next) => {
-  messages.push(req.body);
-  res.json(req.body);
+  Message.create(req.body)
+    .then(message => {
+      res.json(message);
+    }, err => {
+      next(err);
+    })
 };

@@ -8,7 +8,7 @@ export const params = (req, res, next, id) => {
     .exec()
     .then((user) => {
     if (!user) {
-      next(new Error('No suer with that id'));
+      next(new Error('No user with that id'));
     } else {
       req.user = user;
       next();
@@ -39,9 +39,11 @@ export const getOne = (req, res, next) => {
 export const put = (req, res, next) =>{
   const user = req.user;
   const update = req.body;
+  console.log('user ' + user);
+  console.log('new user' + update);
   _.merge(user, update);
 
-  user.save((err, saved) =>{
+  User.save((err, saved) =>{
     if (err) {
       next(err);
     } else {

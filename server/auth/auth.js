@@ -14,6 +14,7 @@ export const decodeToken = () => {
     // if it is, place it on the headers where it should be
     // so checkToken can see it. See follow the 'Bearer 034930493' format
     // so checkToken can see it and decode it
+    // for example localhost:4000/api/users/me?access_token=eyJhbGciOiJI...
     if (req.query && req.query.hasOwnProperty('access_token')) {
       req.headers.authorization = 'Bearer ' + req.query.access_token;
     }
