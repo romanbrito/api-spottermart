@@ -3,7 +3,7 @@ import _ from 'lodash';
 import {signToken} from '../../auth/auth';
 
 export const params = (req, res, next, id) => {
-  User.findByid(id)
+  User.findById(id)
     .select('-password') // means don't select the password
     .exec()
     .then((user) => {
