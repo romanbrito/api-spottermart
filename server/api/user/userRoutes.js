@@ -17,7 +17,8 @@ router.route('/')
 
 router.route('/:id')
   .get(controller.getOne)
-  .put(checkUser, controller.put)
+  //.put(checkUser, controller.put)
+  .put(controller.put)
   .delete(checkUser, controller.del);
 
 export default router;

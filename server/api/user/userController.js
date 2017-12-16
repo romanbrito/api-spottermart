@@ -7,14 +7,14 @@ export const params = (req, res, next, id) => {
     .select('-password') // means don't select the password
     .exec()
     .then((user) => {
-    if (!user) {
-      next(new Error('No user with that id'));
-    } else {
-      req.user = user;
-      next();
-    }
+      if (!user) {
+        next(new Error('No user with that id'));
+      } else {
+        req.user = user;
+        next();
+      }
     }, (err) => {
-    next(err);
+      next(err);
     })
 };
 
@@ -22,12 +22,12 @@ export const get = (req, res, next) => {
   User.find({})
     .select('-password') // means don't select the password
     .exec()
-    .then((users) =>{
-    res.json(users.map((user)=>{
-      return user.toJson();
-    }));
-    }, (err) =>{
-    next(err);
+    .then((users) => {
+      res.json(users.map((user) => {
+        return user.toJson();
+      }));
+    }, (err) => {
+      next(err);
     })
 };
 
@@ -36,34 +36,34 @@ export const getOne = (req, res, next) => {
   res.json(user.toJson());
 };
 
-export const put = (req, res, next) =>{
-  const user = req.user;
+export const put = (req, res, next) => {
+  const userId = req.user;
   const update = req.body;
-  console.log('user ' + user);
-  console.log('new user' + update);
-  _.merge(user, update);
 
-  User.save((err, saved) =>{
+  User.findByIdAndUpdate(userId, update, (err, saved) => {
     if (err) {
       next(err);
     } else {
       res.json(saved.toJson());
     }
   })
+
 };
 
-export const post = (req, res, next) =>{
+export const post = (req, res, next) => {
   const newUser = new User(req.body);
 
   newUser.save((err, user) => {
-    if(err) { return next(err)}
+    if (err) {
+      return next(err)
+    }
 
     const token = signToken(user._id);
     res.json({token}) // same as token:token
   })
 };
 
-export const del = (req, res, next) =>{
+export const del = (req, res, next) => {
   req.user.remove((err, removed) => {
     if (err) {
       next(err);
