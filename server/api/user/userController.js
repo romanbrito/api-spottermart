@@ -37,17 +37,20 @@ export const getOne = (req, res, next) => {
 };
 
 export const put = (req, res, next) => {
-  const userId = req.user;
+  const user = req.user;
+
   const update = req.body;
 
-  User.findByIdAndUpdate(userId, update, (err, saved) => {
+  _.merge(user, update);
+  console.log(user);
+
+  user.save(function(err, saved) {
     if (err) {
       next(err);
     } else {
       res.json(saved.toJson());
     }
   })
-
 };
 
 export const post = (req, res, next) => {
