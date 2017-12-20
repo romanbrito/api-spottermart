@@ -1,0 +1,45 @@
+{
+  "Restaurant_Type": "Texadelphia Sandwich Franchises",
+  "BusinessName": "Texadelphia Laredo",
+  "Address": "Del Mar",
+  "City": "Laredo",
+  "State": "Texas",
+  "zipCode": "78041",
+  "Structure": "LLC",
+  "FranchiseYesNo":"True",
+  "Franchise": {"YearsRemaining": "10","Royalties":"4.5","MarketingFee": ".5%","TransferFee":"5,000", "FranchiseTraining":"1 week"},
+  "Website":"www.texadelphia.com",
+  "FullTimeEmployees": "5",
+  "PartTimeEmployees": "3",
+  "Rent": "4,800",
+  "AlcoholLicense":"True",
+  "Price": "120,000",
+  "Financing": "0",
+  "NetIncome": "25,000",
+  "Description": "Franchise Opportunity, Gorgeous Restaurant, etc",
+  "GrossIncome": "480,000",
+  "Status": "SOLD",
+  "EquipmentInventory": [
+    {},
+    {}
+  ],
+  "SocialMedia": [
+    {},
+    {}
+  ],
+  "SocialMediaRating": "5",
+  "Owned": "Leased",
+  "HowLongInOperation": "7 Years",
+  "HowManySeats": "86",
+  "WhySelling": "Owner is pursuing a different career",
+  "HoursOfOperation": "11am to 9pm",
+  "RequirementsToQualify": "Franchise requirements of liquidity and net worth",
+  "Notes": "Established franchise opportunity.  Turnkey and ready to move in",
+  "Pictures": [
+    {},
+    {},
+    {}
+  ],
+  "InsideSqFeet":"2,400",
+  "TermOfLease":"3 Year"
+}

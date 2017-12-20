@@ -9,7 +9,10 @@ import middleware from './middleware/appMiddleware';
 
 // db.url is different depending on NODE_ENV
 
-mongoose.connect(config.db.url);
+mongoose.connect(config.db.url, {
+  useMongoClient: true
+});
+
 
 if (config.seed ) {
   require('./util/seed');
