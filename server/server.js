@@ -8,11 +8,13 @@ import mongoose from 'mongoose';
 import middleware from './middleware/appMiddleware';
 
 // db.url is different depending on NODE_ENV
-
+// mongoose
 mongoose.connect(config.db.url, {
   useMongoClient: true
 });
 
+// Use native promises
+mongoose.Promise = global.Promise;
 
 if (config.seed ) {
   require('./util/seed');
