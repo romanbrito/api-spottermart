@@ -2,6 +2,7 @@ import User from '../api/user/userModel';
 import Post from '../api/post/postModel';
 import Category from '../api/category/categoryModel';
 import Message from '../api/message/messageModel';
+import Asset from '../api/asset/assetModel';
 import _ from 'lodash';
 import logger from './logger';
 
@@ -29,6 +30,12 @@ const messages = [
   {text: 'Angular is so dope'},
   {text: 'IE7 is so amazing'},
   {text: 'go is dope'}
+];
+
+const assets = [
+  {BusinessName: 'Texadelphia Laredo'},
+  {BusinessName: 'Texadelphia Great Hills'},
+  {BusinessName: 'Texadelphia McAllen'}
 ];
 
 const createDoc = (model, doc) => {
@@ -82,6 +89,15 @@ const createMessages = (data) => {
 
 };
 
+const createAssets = (data) => {
+  const newAssets = assets.map((asset, i) => {
+    asset.author = data.users[i]._id;
+    return createDoc(Asset, asset)
+  });
+
+  return data;
+};
+
 const createPosts = (data) => {
   const addCategory = (post, category) => {
     post.categories.push(category);
@@ -105,13 +121,14 @@ const createPosts = (data) => {
       }))
     })
     .then(() => {
-      return 'Seeded Db with 3 Posts, 3 Users, 3 Categories, 3 Messages';
+      return 'Seeded Db with 3 Posts, 3 Users, 3 Categories, 3 Messages, 3 Assets';
     })
 };
 
 cleanDB()
   .then(createUsers)
   .then(createMessages)
+  .then(createAssets)
   .then(createCategories)
   .then(createPosts)
   .then(logger.log.bind(logger))

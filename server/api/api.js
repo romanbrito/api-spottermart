@@ -1,9 +1,13 @@
 import {Router} from 'express';
+
 const router = Router();
 import userRoutes from './user/userRoutes';
 import categoryRoutes from './category/categoryRoutes';
 import postRoutes from './post/postRoutes';
+import assetRoutes from './asset/assetRoutes';
+
 import auth from '../auth/routes';
+
 
 import messageRoutes from './message/messageRoutes';
 //import auth from './message/auth/routes';
@@ -29,6 +33,7 @@ router.use('/users', userRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/posts', postRoutes);
 
+router.use('/assets', assetRoutes);
 router.use('/messages', messageRoutes);
 router.use('/', auth);
 
