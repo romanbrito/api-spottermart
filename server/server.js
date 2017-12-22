@@ -1,4 +1,5 @@
 import express from 'express';
+import path from 'path';
 import api from './api/api'; // router
 import err from './middleware/err';
 import config from './config/config';
@@ -22,6 +23,10 @@ if (config.seed ) {
 
 //setup the app middleware
 const app = express();
+
+// serve static
+app.use(express.static('uploads'));
+
 middleware(app);
 
 // try curl localhost:3000/api/users

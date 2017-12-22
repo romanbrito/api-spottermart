@@ -7,9 +7,6 @@ const AssetSchema = new Schema({
     type: String,
     required: true
   },
-  img: {
-    data: Buffer, contentType: String
-  },
   author: {
     type: Schema.Types.ObjectId,
     ref: 'user',

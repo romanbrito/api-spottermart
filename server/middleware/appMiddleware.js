@@ -2,7 +2,6 @@ import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import override from 'method-override';
-import multer from 'multer';
 
 // setup global middleware here
 
@@ -17,13 +16,6 @@ const middleware = app => {
   //   res.header("Access-Control-Allow-Headers", "Origin", X-Requested-With, Content-Type, Accept, Authorization");
   //   next();
   app.use(override());
-
-  app.use(multer({ dest: './uploads/',
-  rename: function (fieldname, filename) {
-    return filename;
-  }
-}));
-
 };
 
 export default middleware;

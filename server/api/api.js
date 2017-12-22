@@ -5,6 +5,7 @@ import userRoutes from './user/userRoutes';
 import categoryRoutes from './category/categoryRoutes';
 import postRoutes from './post/postRoutes';
 import assetRoutes from './asset/assetRoutes';
+import imageRoutes from './asset/image/imageRoutes'
 
 import auth from '../auth/routes';
 
@@ -34,6 +35,8 @@ router.use('/categories', categoryRoutes);
 router.use('/posts', postRoutes);
 
 router.use('/assets', assetRoutes);
+router.use('/images', imageRoutes);
+
 router.use('/messages', messageRoutes);
 router.use('/', auth);
 
