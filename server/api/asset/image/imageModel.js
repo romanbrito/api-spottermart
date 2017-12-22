@@ -6,7 +6,7 @@ const ImageSchema = new Schema ({
   img: {
     data: Buffer, contentType: String
   },
-  asset: {
+  Business: {
     type: Schema.Types.ObjectId,
     ref: 'asset',
     //required: true

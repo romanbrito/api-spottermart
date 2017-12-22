@@ -1,8 +1,6 @@
 import {Router} from 'express';
 import multer from 'multer';
-import fs from 'fs';
 import * as controller from "./imageController";
-import Image from './imageModel';
 
 const router = Router();
 
@@ -16,18 +14,13 @@ const storage = multer.diskStorage({
 });
 const upload = multer({storage});
 
-router.post('/', upload.single('file-to-upload'), (req, res) => {
-  const newImage = new Image();
-  newImage.img.data = fs.readFileSync('uploads/file-to-upload');
-  newImage.img.contentType = 'image/jpeg';
-  newImage.save();
+router.param('id', controller.params);
 
-  console.log(req.file);
-  res.json({'message': 'File uploaded successfully'});
-});
+router.route('/')
+  .post(upload.single('file-to-upload'), controller.post);
 
 
-
-//.post(controller.post);
+router.route('/:id')
+  .get(controller.getOne);
 
 export default router;
