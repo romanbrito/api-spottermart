@@ -11,6 +11,11 @@ const AssetSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'user',
     required: true
+  },
+  image: {
+    type: Schema.Types.ObjectId,
+    ref: 'image',
+    //required: true
   }
 });
 

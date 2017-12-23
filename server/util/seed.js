@@ -3,8 +3,10 @@ import Post from '../api/post/postModel';
 import Category from '../api/category/categoryModel';
 import Message from '../api/message/messageModel';
 import Asset from '../api/asset/assetModel';
+import Image from '../api/asset/image/imageModel';
 import _ from 'lodash';
 import logger from './logger';
+import fs from 'fs';
 
 logger.log('Seeding the Database');
 
@@ -38,6 +40,12 @@ const assets = [
   {BusinessName: 'Texadelphia McAllen'}
 ];
 
+const images = [
+  'uploads/Laredo.jpg',
+  'uploads/GreatHills.jpg',
+  'uploads/Mcallen.jpg'
+];
+
 const createDoc = (model, doc) => {
   return new Promise((resolve, reject) => {
     new model(doc).save((err, saved) => {
@@ -48,11 +56,25 @@ const createDoc = (model, doc) => {
 
 const cleanDB = () => {
   logger.log('... clean the DB');
-  const cleanPromises = [User, Category, Post, Message, Asset]
+  const cleanPromises = [User, Category, Post, Message, Asset, Image]
     .map((model) => {
       return model.remove().exec();
     });
   return Promise.all(cleanPromises);
+};
+
+const createImages = (data) => {
+  const promises = images.map(image => {
+    const newImage = new Image();
+    newImage.img.data = fs.readFileSync(image);
+    newImage.img.contentType = 'image/jpeg';
+    return newImage.save();
+  });
+
+  return Promise.all(promises)
+    .then((images) => {
+      return _.merge({images: images}, data || {});
+    })
 };
 
 const createUsers = (data) => {
@@ -92,6 +114,7 @@ const createMessages = (data) => {
 const createAssets = (data) => {
   const newAssets = assets.map((asset, i) => {
     asset.author = data.users[i]._id;
+    asset.image = data.images[i]._id;
     return createDoc(Asset, asset)
   });
 
@@ -121,13 +144,14 @@ const createPosts = (data) => {
       }))
     })
     .then(() => {
-      return 'Seeded Db with 3 Posts, 3 Users, 3 Categories, 3 Messages, 3 Assets';
+      return 'Seeded Db with 3 Posts, 3 Users, 3 Categories, 3 Messages, 3 Assets with one image';
     })
 };
 
 cleanDB()
   .then(createUsers)
   .then(createMessages)
+  .then(createImages)
   .then(createAssets)
   .then(createCategories)
   .then(createPosts)

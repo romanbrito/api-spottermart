@@ -3,7 +3,7 @@ import fs from 'fs';
 
 export const params = (req, res, next, id) => {
   Image.findById(id)
-  //.populate()
+    .populate()
     .exec()
     .then(image => {
       if (!image) {

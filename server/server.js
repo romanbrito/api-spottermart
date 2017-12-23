@@ -25,7 +25,7 @@ if (config.seed ) {
 const app = express();
 
 // serve static
-app.use(express.static('uploads'));
+// app.use(express.static('uploads'));
 
 middleware(app);
 
