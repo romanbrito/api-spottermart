@@ -1,6 +1,7 @@
 import {Router} from 'express';
 import * as controller from './messageController';
 import * as auth from '../../auth/auth';
+
 const router = Router();
 
 // checkUser will secure routes when on middleware
