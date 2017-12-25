@@ -20,10 +20,13 @@ export const post = (req, res, next) => {
   const newImage = new Image();
   newImage.img.data = fs.readFileSync('uploads/file-to-upload');
   newImage.img.contentType = 'image/jpeg';
-  newImage.save();
-
-  console.log(req.file);
-  res.json({'message': 'File uploaded successfully'});
+  newImage.save((err,saved) => {
+    if (err){
+      next(err);
+    } else {
+      res.json(saved);
+    }
+  });
 };
 
 export const getOne = (req, res, next) => {

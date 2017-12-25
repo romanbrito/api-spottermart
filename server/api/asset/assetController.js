@@ -27,3 +27,9 @@ export const getOne = (req, res, next) => {
   const asset = req.asset;
   res.json(asset);
 };
+
+export const post = (req, res, next) => {
+  Asset.create(req.body)
+    .then(asset => res.json(asset),
+      err => next(err));
+};
