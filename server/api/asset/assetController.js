@@ -33,3 +33,13 @@ export const post = (req, res, next) => {
     .then(asset => res.json(asset),
       err => next(err));
 };
+
+export const me = (req, res) => {
+  Asset.findOne({
+    BusinessName: req.params.BusName
+  })
+    .populate('author', '-password')
+    .populate('image')
+    .exec()
+    .then(asset => res.json(asset))
+};
